@@ -23,7 +23,7 @@ def change_password_in_db(*,current_username:str,data: UserUpdateSchema,db: Sess
     is_correct_user = db.query(User).filter_by(username=current_username,password=data.password).first()
     if not is_correct_user:
         raise UserNotFoundException()
-    db.query(User).update({"password":data.new_password})
+    db.query(User).filter(User.username==current_username).update({"password":data.new_password})
     db.commit()
     return {"msg":"password is changed"}
     
