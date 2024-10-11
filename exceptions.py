@@ -13,4 +13,12 @@ class DetailedHTTPException(HTTPException):
 
 class UserNotFoundException(DetailedHTTPException):
     STATUS_CODE = status.HTTP_404_NOT_FOUND
-    DETAIL = "user is not found"
+    DETAIL = "User is not found"
+
+class InvalidPassword(DetailedHTTPException):
+    STATUS_CODE= status.HTTP_401_UNAUTHORIZED
+    DETAIL = "Invalid password"
+
+class UserAlreadyExist(DetailedHTTPException):
+    STATUS_CODE=status.HTTP_409_CONFLICT
+    DETAIL = "User already exist"
